@@ -47,7 +47,7 @@ function Disconnect-NetScaler {
         Write-Verbose -Message 'Logging out of NetScaler'
         $params = @{
             Uri = $Session.CreateUri("config", "logout")
-            Body = ConvertTo-Json -InputObject @{logout = @{}}
+            Body = ConvertTo-Json -InputObject @{logout = @{}} -Depth 100
             Method = 'POST'
             ContentType = 'application/json'
             WebSession = $session.WebSession

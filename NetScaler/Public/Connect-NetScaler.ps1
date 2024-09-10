@@ -120,7 +120,7 @@ function Connect-NetScaler {
         if ($response.severity -eq 'ERROR') {
             throw "Error. See response: `n$($response | Format-List -Property * | Out-String)"
         } else {
-            Write-Verbose -Message "Response:`n$(ConvertTo-Json -InputObject $response | Out-String)"
+            Write-Verbose -Message "Response:`n$(ConvertTo-Json -InputObject $response -Depth 100| Out-String)"
         }
     } catch [Exception] {
         throw $_
