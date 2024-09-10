@@ -37,7 +37,8 @@ function Disconnect-NetScaler {
     #>
     [cmdletbinding()]
     param(
-        $Session = $script:session
+        $Session = $script:session,
+        [switch] $SkipCertificateCheck = $Session.SkipCertificateCheck
     )
 
     _AssertSessionActive
@@ -50,6 +51,7 @@ function Disconnect-NetScaler {
             Method = 'POST'
             ContentType = 'application/json'
             WebSession = $session.WebSession
+            SkipCertificateCheck = $SkipCertificateCheck
         }
         try {
             Invoke-RestMethod @params
