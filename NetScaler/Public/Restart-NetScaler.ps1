@@ -77,7 +77,9 @@ function Restart-NetScaler {
 
         [int]$WaitTimeout = 900,
 
-        [switch]$Force
+        [switch]$Force,
+
+        [switch] $SkipCertificateCheck = $Session.SkipCertificateCheck
     )
 
     begin {
@@ -123,6 +125,7 @@ function Restart-NetScaler {
                                 Method = 'GET'
                                 ContentType = 'application/json'
                                 ErrorVariable = 'connectTestError'
+                                SkipCertificateCheck = $SkipCertificateCheck
                             }
                             $response = Invoke-RestMethod @params
                         }

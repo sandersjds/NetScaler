@@ -59,7 +59,9 @@ function _InvokeNSRestApi {
         [switch]$GetWarning = $false,
 
         [ValidateSet('EXIT', 'CONTINUE', 'ROLLBACK')]
-        [string]$OnErrorAction = 'EXIT'
+        [string]$OnErrorAction = 'EXIT',
+
+        [switch] $SkipCertificateCheck = $Session.SkipCertificateCheck
     )
 
     if ($Stat) {
@@ -135,6 +137,7 @@ function _InvokeNSRestApi {
             WebSession = $Session.WebSession
             ErrorVariable = 'restError'
             Verbose = $false
+            SkipCertificateCheck = $SkipCertificateCheck
         }
 
         if ($Method -ne 'GET') {

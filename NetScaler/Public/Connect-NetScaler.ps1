@@ -62,7 +62,9 @@ function Connect-NetScaler {
 
         [switch]$Https,
 
-        [switch]$PassThru
+        [switch]$PassThru,
+
+        [switch]$SkipCertificateCheck
     )
 
     if ($PSCmdlet.ParameterSetName -eq 'IP') {
@@ -81,6 +83,7 @@ function Connect-NetScaler {
     $session = New-Object -TypeName PSObject
     $session | Add-Member -NotePropertyName Endpoint -NotePropertyValue $endpoint -TypeName String
     $session | Add-Member -NotePropertyName Scheme   -NotePropertyValue $scheme -TypeName String
+    $session | Add-Member -NotePropertyName SkipCertificateCheck -NotePropertyValue $SkipCertificateCheck -TypeName Boolean
     $session | Add-Member -Name Uri -MemberType ScriptProperty -Value {
         "$($this.scheme)://$($this.endpoint)/nitro/v1"
     }
